@@ -143,6 +143,7 @@
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
 							<td></td>
+							<td></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -157,16 +158,24 @@
 							<td class="cart_price">
 								<p>$<%= product_id[0].product_price %></p>
 							</td>
-							<td class="cart_quantity">
+							<td class="cart_quantity" style="position: relative; bottom: 5px;">
 								<div class="cart_quantity_button">
 									<!-- <a class="cart_quantity_up" href=""> + </a> -->
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<input class="cart_quantity_input" type="text" name="quantity" value="<%= quantity %>" disabled="disabled" size="2">
 									<!-- <a class="cart_quantity_down" href=""> - </a> -->
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
+                <p class="cart_total_price">$<%= product_id[0].product_price*quantity %></p>
+                <input type="hidden" value="<%= product_id[0].product_price*quantity %>">
+              </td>
+              
+              <td style="position: relative; bottom: 5px;">
+                <div class="cart_quantity_button">
+                  <input type="Submit" value="order" style="background-color: #faab3f; color: white; width:80px; font-size: 16px; padding: 5px; border: none;"/>
+                </div>
+              </td>
+              
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>

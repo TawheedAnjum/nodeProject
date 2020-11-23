@@ -55,18 +55,8 @@ module.exports = {
   },
 
   insert: function (user, callback) {
-    var cu_name = user.cu_name;
-    var cu_email = user.cu_email;
-    var cu_pass = user.cu_pass;
 
-    var sql =
-      "insert into customer VALUES ('" +
-      user.cu_name +
-      "' , '" +
-      user.cu_email +
-      "' , '" +
-      user.cu_pass +
-      "')";
+  var sql ="insert into customer VALUES ('', '" +user.cu_name +"' , '" +user.cu_email +"' , '" +user.cu_pass +"')";
     // var sql ="INSERT INTO customer ('cu_name','cu_email','cu_pass') VALUES (?,?,?)";
 
     db.execute(sql, function (status) {

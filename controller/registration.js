@@ -15,12 +15,12 @@ router.post('/', (req, res)=>{
       cu_pass	: 	req.body.cu_pass
 	};
 
-	userModel.insert(customer, function(status){
-		if(status){
-			res.redirect('/home');
-		}else{
-			res.redirect('/registration');
-		}
+	userModel.insert(customer, function (status) {
+    if (status) {
+      res.redirect("/home");
+    } else {
+      res.redirect("/registration");
+    }
   });
 
 // res.send(customer);
