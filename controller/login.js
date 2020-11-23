@@ -11,13 +11,24 @@ router.post("/", (req, res) => {
     cu_email: req.body.cu_email,
     cu_pass: req.body.cu_pass,
   };
+  
 
   userModel.validate(customer, function (status) {
     if (status) {
-      res.cookie("uname", req.body.cu_email);
-      res.redirect("/home");
+      var cu_email = req.body.cu_email;
+      userModel.getCustomerID(cu_email, function (results) {
+        
+        var customerID = results[0].cu_id;
+
+        res.cookie("customerID", customerID);
+        res.redirect("/home");
+
+    });
+
+      
     } else {
       res.redirect("/login");
+      
     }
   });
 });

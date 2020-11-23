@@ -31,19 +31,49 @@ module.exports = {
       });
     });
   },
-  execute: function (sql, callback) {
-    getConnection(function (connection) {
-      connection.query(sql, function (error, status) {
-        if (status) {
-          callback(true);
-        } else {
-          callback(false);
-        }
-      });
+  // execute: function (sql, callback) {
+  //   getConnection(function (connection) {
+  //     connection.query(sql, function (error, status) {
+  //       if (status) {
+  //         callback(true);
+  //       } else {
+  //         callback(false);
+  //       }
+  //     });
 
-      connection.end(function (err) {
-        console.log("connection closed!");
-      });
+  //     connection.end(function (err) {
+  //       console.log("connection closed!");
+  //     });
+  //   });
+  // },
+
+  execute: function (sql, params, callback) {
+    getConnection(function (connection) {
+      if (params != null) {
+        connection.query(sql, params, function (error, status) {
+          if (status) {
+            callback(true);
+          } else {
+            callback(false);
+          }
+        });
+
+        connection.end(function (err) {
+          console.log("connection closed!");
+        });
+      } else {
+        connection.query(sql, function (error, status) {
+          if (status) {
+            callback(true);
+          } else {
+            callback(false);
+          }
+        });
+
+        connection.end(function (err) {
+          console.log("connection closed!");
+        });
+      }
     });
   },
 };

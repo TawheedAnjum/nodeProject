@@ -17,13 +17,37 @@ module.exports = {
     });
   },
 
+  // customer..........start
+
+  cartInsert: function (user, callback) {
+    var sql = "insert into cart (cu_id, id, quantity) VALUES (?, ?, ?)";
+
+    db.execute(
+      sql,
+      [user.cu_id, user.id, user.quantity],
+      function (status) {
+        callback(status);
+      }
+    );
+  },
+
   getByCustomer: function (id, callback) {
-    var sql = "SELECT * FROM customer WHERE cu_email='" + id + "'";
+    var sql = "SELECT * FROM customer WHERE cu_id='" + id + "'";
     db.getResults(sql, function (results) {
       callback(results);
     });
   },
 
+  getCustomerID: function (id, callback) {
+    var sql = "SELECT cu_id FROM customer WHERE cu_email='" + id + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  // customerr-----end
+
+  // product......start
   getByProductCategory: function (id, callback) {
     var sql = "SELECT * FROM products WHERE category_id='" + id + "'";
     db.getResults(sql, function (results) {
@@ -46,7 +70,18 @@ module.exports = {
       callback(results);
     });
   },
+  // product......end;
 
+  // Cart......start
+  getCartList: function (id, callback) {
+    var sql = "SELECT * FROM cart WHERE cu_id='" + id + "'";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+  // Cart......end
+
+  // catagory.......
   getAllCategory: function (callback) {
     var sql = "select * from category";
     db.getResults(sql, function (results) {
@@ -54,15 +89,6 @@ module.exports = {
     });
   },
 
-  insert: function (user, callback) {
-
-  var sql ="insert into customer VALUES ('', '" +user.cu_name +"' , '" +user.cu_email +"' , '" +user.cu_pass +"')";
-    // var sql ="INSERT INTO customer ('cu_name','cu_email','cu_pass') VALUES (?,?,?)";
-
-    db.execute(sql, function (status) {
-      callback(status);
-    });
-  },
   // update: function(){
 
   // },

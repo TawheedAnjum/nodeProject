@@ -3,7 +3,7 @@ const userModel = require.main.require("./models/userModel");
 const router = express.Router();
 
 router.post("/:id", (req, res) => {
-    var product_id = req.params.id;
+    var customerID = req.params.id;
 
     var cart = {
       cu_id: req.body.cu_id,
@@ -11,15 +11,40 @@ router.post("/:id", (req, res) => {
       quantity: req.body.quantity
     };
 
+    userModel.cartInsert(cart, function (status) {
+      if (status) {
+        res.send("ok");
+      } else {
+        res.send("no");
+      }
+    });
+
     // res.send(cart);
 
-    userModel.getByProduct(product_id, function (result1) {
-      res.render("cart", { product_id: result1, quantity: cart.quantity });
-    });
+    // userModel.getCartList(customerID, function (results1) {
+    //    userModel.getByProduct(cart.product_id, function (result2) {
+    //       res.render("cart", { customerID: results1, product_id: result2, quantity: cart.quantity });
+    //    });
+      
+    // });
+
+   
   });
 
-// router.get("/product/:id", (req, res) => {
-//   res.send("ok");
-// });
+  router.get("/:id", (req, res) => {
+    var customerID = req.params.id;
+
+    // userModel.getCartList(customerID, function (results1) {
+    //    userModel.getByProduct(cart.product_id, function (result2) {
+    //       res.render("cart", { customerID: results1, product_id: result2, quantity: cart.quantity });
+    //    });
+    // });
+
+    // userModel.getCartList(customerID, function (cartList) {
+    //    res.send(cartList);
+    // });
+
+  });
+
 
 module.exports = router;

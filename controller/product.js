@@ -4,13 +4,20 @@ const router = express.Router();
 
 
 router.get("/:id", (req, res) => {
+
   var product_id = req.params.id;
-  userModel.getAllCategory(function (result2) {
-    userModel.getByProduct(product_id, function (result1) {
-      res.render("product", { product_id: result1, category: result2 });
+
+  var customerID = req.cookies["customerID"];
+
+  userModel.getByCustomer(customerID, function (result1){
+    userModel.getAllCategory(function (result2) {
+      userModel.getByProduct(product_id, function (result3) {
+        res.render("product", { product_id: result3, category: result2, customer: result1 });
+      });
     });
   });
-  // res.send("ok");
+
+
 });
 
 router.post("/:id", (req, res) => {

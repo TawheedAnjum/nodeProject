@@ -5,10 +5,11 @@ const app = express();
 
 const registration = require("./controller/registration");
 const login = require("./controller/login");
-const home = require("./controller/home/home");
+const home = require("./controller/home");
 const category = require("./controller/category");
 const product = require("./controller/product");
 const cart = require("./controller/cart");
+const logout = require("./controller/logout");
 
 //config
 app.set('view engine', 'ejs');
@@ -24,6 +25,8 @@ app.use("/home", home);
 app.use("/category", category);
 app.use("/product", product);
 app.use("/cart", cart);
+app.use("/logout", logout);
+
 
 
 app.get('/', (req, res) => {
