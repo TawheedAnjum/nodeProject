@@ -104,7 +104,7 @@
                     <a href="/login"><i class="fa fa-user"></i> <%= customer[0].cu_name %></a>
                   </li>
                   <li>
-                    <a href="cart.html"
+                    <a href="/cart/<%= customer[0].cu_id %>"
                       ><i class="fa fa-shopping-cart"></i> Cart</a
                     >
                   </li>
@@ -298,7 +298,7 @@
               <h2>Category</h2>
               <div class="panel-group category-products" id="accordian">
                 <!--category-productsr-->
-                <% for(var i=0; i< category.length; i++ ){ %>
+                <!-- <% for(var i=0; i< category.length; i++ ){ %>
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4 class="panel-title">
@@ -322,7 +322,7 @@
                     </div>
                   </div>
                 </div>
-                <% } %>
+                <% } %> -->
 
                 <% for(var i=0; i< category.length; i++ ){ %>
                 <div class="panel panel-default">

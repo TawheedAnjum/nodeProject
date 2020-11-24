@@ -36,14 +36,39 @@ router.post("/:id", (req, res) => {
     var customerID = req.params.id;
 
     // userModel.getCartList(customerID, function (results1) {
-    //    userModel.getByProduct(cart.product_id, function (result2) {
-    //       res.render("cart", { customerID: results1, product_id: result2, quantity: cart.quantity });
-    //    });
+    //   var product=[];
+    //   for(i=0; i<results1.length; i++){
+    //     product.push(results1[i].id)
+    //   }
+    //   console.log(product);
     // });
 
-    // userModel.getCartList(customerID, function (cartList) {
-    //    res.send(cartList);
+    // userModel.getCartList(customerID, function (results2){
+    // userModel.getByCart(customerID, function (results1) {
+    //   res.send(results1);
     // });
+    // });
+
+    userModel.getByCustomer(customerID, function (results2) {
+      userModel.getByCart(customerID, function (results1) {
+        res.render("cart", {
+          info: results1,
+          customerID: results2,
+        });
+      });
+
+      // res.render("cart", {
+      //   customerID: results2,
+      // });
+    });
+  });
+
+  router.get("/delete/:id", (req, res) => {
+    var customer = req.cookies["customerID"];
+    var cart_id = req.params.id;
+    userModel.deleteCart(cart_id, function (results2) {
+      res.redirect("/cart/" + customer);
+    });
 
   });
 
