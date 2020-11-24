@@ -8,6 +8,8 @@ module.exports = {
       "' and cu_pass='" +
       user.cu_pass +
       "'";
+
+      console.log(sql)
     db.getResults(sql, function (results) {
       if (results.length > 0) {
         callback(true);
@@ -19,16 +21,21 @@ module.exports = {
 
   // customer..........start
 
-  cartInsert: function (user, callback) {
-    var sql = "insert into cart (cu_id, id, quantity) VALUES (?, ?, ?)";
+  insert: function (user, callback) {
+    var sql =
+      "INSERT INTO customer (cu_name, cu_email, cu_pass) VALUES ('" +
+      user.cu_name +
+      "', '" +
+      user.cu_email +
+      "', '" +
+      user.cu_pass +
+      "')";
+    // var sql ="INSERT INTO customer ('cu_name','cu_email','cu_pass') VALUES (?,?,?)";
+    // console.log(sql)
 
-    db.execute(
-      sql,
-      [user.cu_id, user.id, user.quantity],
-      function (status) {
-        callback(status);
-      }
-    );
+    db.execute(sql, function (status) {
+      callback(status);
+    });
   },
 
   getByCustomer: function (id, callback) {
@@ -84,6 +91,13 @@ module.exports = {
   // catagory.......
   getAllCategory: function (callback) {
     var sql = "select * from category";
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
+  },
+
+  getBySubcategory: function (id, callback) {
+    var sql = "SELECT * FROM subcategory WHERE category_id='" + id + "'";
     db.getResults(sql, function (results) {
       callback(results);
     });

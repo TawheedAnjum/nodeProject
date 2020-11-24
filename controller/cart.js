@@ -11,15 +11,16 @@ router.post("/:id", (req, res) => {
       quantity: req.body.quantity
     };
 
-    userModel.cartInsert(cart, function (status) {
-      if (status) {
-        res.send("ok");
-      } else {
-        res.send("no");
-      }
-    });
+    // userModel.cartInsert(cart, function (status) {
+    //   if (status) {
+    //     res.send("ok");
+    //   } else {
+    //     res.send("no");
+    //   }
+    // });
+    
 
-    // res.send(cart);
+    res.send(cart);
 
     // userModel.getCartList(customerID, function (results1) {
     //    userModel.getByProduct(cart.product_id, function (result2) {

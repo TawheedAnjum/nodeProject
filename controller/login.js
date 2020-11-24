@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   };
   
 
-  userModel.validate(customer, function (status) {
+   userModel.validate(customer, function (status) {
     if (status) {
       var cu_email = req.body.cu_email;
       userModel.getCustomerID(cu_email, function (results) {
@@ -22,15 +22,16 @@ router.post("/", (req, res) => {
 
         res.cookie("customerID", customerID);
         res.redirect("/home");
-
     });
 
-      
     } else {
       res.redirect("/login");
       
     }
   });
+
+  
 });
+
 
 module.exports = router;

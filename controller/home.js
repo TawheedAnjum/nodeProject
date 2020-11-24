@@ -8,10 +8,26 @@ router.get("/", (req, res) => {
     
     var customerID = req.cookies['customerID'];
     
+    // userModel.getByCustomer(customerID, function (result1) {
+    //   userModel.getAll(function (result2) {
+    //     userModel.getAllCategory(function (result3) {
+    //       userModel.getBySubcategory(result3, function (result4) {
+    //         res.render("home", {
+    //           customer: result1,
+    //           product: result2,
+    //           category: result3,
+    //           subCategory: result4
+    //         });
+    //       });
+    //     });
+    //   });
+    // });
+    
+
     userModel.getByCustomer(customerID, function (result1) {
       userModel.getAll(function (result2) {
         userModel.getAllCategory(function (result3) {
-          res.render("home", {
+            res.render("home", {
             customer: result1,
             product: result2,
             category: result3
