@@ -104,13 +104,30 @@ module.exports = {
     });
   },
 
-  deleteCart: function (id, callback) {
-    var sql = "DELETE * FROM cart WHERE cart_id=" +id;
-
+  insertCart: function (user, callback) {
+    var sql =
+      "INSERT INTO cart (cu_id, id, quantity) VALUES (" +
+      user.cu_id +
+      ", " +
+      user.product_id +
+      ", " +
+      user.quantity +
+      ")";
+    // var sql ="INSERT INTO customer ('cu_name','cu_email','cu_pass') VALUES (?,?,?)";
     console.log(sql)
-    // db.getResults(sql, function (results) {
-    //   callback(results);
-    // });
+
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
+
+  deleteCart: function (id, callback) {
+    var sql = "DELETE FROM cart WHERE cart_id=" + id;
+
+    // console.log(sql)
+    db.getResults(sql, function (results) {
+      callback(results);
+    });
   },
   // Cart......end
 
@@ -129,6 +146,29 @@ module.exports = {
     });
   },
 
+  // order
+  orders: function (user, callback) {
+    var sql =
+      "INSERT INTO orders (cu_id, id, quantity, price, order_date, order_status) VALUES (" +
+      user.cu_id +
+      ", " +
+      user.id +
+      ", " +
+      user.quantity +
+      ", " +
+      user.price +
+      ", '" +
+      user.order_date +
+      "', '" +
+      user.order_status +
+      "')";
+    // var sql ="INSERT INTO customer ('cu_name','cu_email','cu_pass') VALUES (?,?,?)";
+    // console.log(sql)
+
+    db.execute(sql, function (status) {
+      callback(status);
+    });
+  },
   // update: function(){
 
   // },

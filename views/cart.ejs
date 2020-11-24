@@ -159,25 +159,29 @@
 							</td>
 							<td class="cart_price">
 								<p>$<%= info[i].product_price %></p>
-							</td>
-							<td class="cart_quantity" style="position: relative; bottom: 5px;">
-								<div class="cart_quantity_button">
-									<!-- <a class="cart_quantity_up" href=""> + </a> -->
-									<input class="cart_quantity_input" type="text" name="quantity" value="<%= info[i].quantity %>" disabled="disabled" size="2">
-									<!-- <a class="cart_quantity_down" href=""> - </a> -->
-								</div>
-							</td>
-							<td class="cart_total">
-                <p class="cart_total_price">$<%= info[i].product_price*info[i].quantity %></p>
-                <input type="hidden" value="<%= info[i].product_price*info[i].quantity %>">
               </td>
-              
-              <td style="position: relative; bottom: 5px;">
-                <div class="cart_quantity_button">
-                  <input type="Submit" value="order" style="background-color: #faab3f; color: white; width:80px; font-size: 16px; padding: 5px; border: none;"/>
-                </div>
-              </td>
-              
+              <form action="/cart/order/<%= info[i].cart_id %>" method="POST">
+                <td class="cart_quantity" style="position: relative; bottom: 5px;">
+                  <div class="cart_quantity_button">
+                    <input type="hidden" name="cu_id" value="<%= customerID[0].cu_id %>">
+                    <input type="hidden" name="id" value="<%= info[i].id %>">
+                    <input class="cart_quantity_input" type="text" value="<%= info[i].quantity%>" disabled="disabled" size="2">
+                    <input class="cart_quantity_input" type="hidden" name="quantity" value="<%= info[i].quantity%>">
+                    <!-- <a class="cart_quantity_down" href=""> - </a> -->
+                  </div>
+                </td>
+                <td class="cart_total">
+                  <p class="cart_total_price">$<%= info[i].product_price*info[i].quantity %></p>
+                  <input type="hidden" name="price" value="<%= info[i].product_price*info[i].quantity %>">
+                </td>
+                
+                <td style="position: relative; bottom: 5px;">
+                  <div class="cart_quantity_button">
+                    <!-- <a href="" style="background-color: #faab3f; color: white; width:80px; font-size: 16px; padding: 5px; border: none;"">order</a> -->
+                    <input type="Submit" value="order" style="background-color: #faab3f; color: white; width:80px; font-size: 16px; padding: 5px; border: none;"/>
+                  </div>
+                </td>
+              </form>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href="/cart/delete/<%= info[i].cart_id %>"><i class="fa fa-times"></i></a>
 							</td>
